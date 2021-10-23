@@ -10,6 +10,7 @@ class Customer {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.fullName = this.fullName();
     this.phone = phone;
     this.notes = notes;
   }
@@ -43,13 +44,12 @@ class Customer {
     );
 
     const customer = results.rows[0];
-
+    
     if (customer === undefined) {
       const err = new Error(`No such customer: ${id}`);
       err.status = 404;
       throw err;
     }
-
     return new Customer(customer);
   }
 
@@ -80,14 +80,13 @@ class Customer {
   };
 
   fullName() {
-    fullName = this.firstName;
     if (this.firstName && this.lastName) {
-      fullName = `${this.firstName} ${this.lastName}`
+      return `${this.firstName} ${this.lastName}`
     };
     if (!this.firstName) {
-      fullName = this.lastName;
+      return this.lastName;
     };
-    this.fullName = fullName;
+    return this.firstName;
   };
 };
 
