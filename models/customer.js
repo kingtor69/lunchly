@@ -76,8 +76,19 @@ class Customer {
              WHERE id=$5`,
         [this.firstName, this.lastName, this.phone, this.notes, this.id]
       );
-    }
-  }
-}
+    };
+  };
+
+  fullName() {
+    fullName = this.firstName;
+    if (this.firstName && this.lastName) {
+      fullName = `${this.firstName} ${this.lastName}`
+    };
+    if (!this.firstName) {
+      fullName = this.lastName;
+    };
+    this.fullName = fullName;
+  };
+};
 
 module.exports = Customer;
